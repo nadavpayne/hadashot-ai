@@ -128,3 +128,37 @@ function buildFallingIcons() {
 }
 
 buildFallingIcons();
+
+// ---- Mobile navigation ----
+// Below 900px the link row collapses into a panel behind the burger.
+const burger = document.querySelector('.nav__burger');
+const navLinks = document.getElementById('nav-links');
+
+if (burger && navLinks) {
+  const setOpen = (open) => {
+    navLinks.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  };
+
+  burger.addEventListener('click', () => {
+    setOpen(burger.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Jumping to a section should not leave the panel covering it.
+  navLinks.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.nav__inner')) setOpen(false);
+  });
+
+  // Leaving mobile width with the panel open would strand the class.
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+}
