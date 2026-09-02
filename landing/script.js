@@ -162,3 +162,26 @@ if (burger && navLinks) {
     if (e.matches) setOpen(false);
   });
 }
+
+// ---- Keyboard access for the carousels ----
+// The article row holds links, so tabbing already reaches and scrolls it. The
+// reasons row is plain text, which would leave a scrollable region no keyboard
+// user could move. Make it focusable, but only while it actually scrolls, so
+// desktop does not gain a stray tab stop.
+function syncCarouselFocus() {
+  document.querySelectorAll('.values').forEach((row) => {
+    const scrolls = row.scrollWidth > row.clientWidth;
+    if (scrolls) {
+      row.setAttribute('tabindex', '0');
+      row.setAttribute('role', 'group');
+      row.setAttribute('aria-label', 'למה לקרוא — גללו לצדדים');
+    } else {
+      row.removeAttribute('tabindex');
+      row.removeAttribute('role');
+      row.removeAttribute('aria-label');
+    }
+  });
+}
+
+syncCarouselFocus();
+window.addEventListener('resize', syncCarouselFocus);
