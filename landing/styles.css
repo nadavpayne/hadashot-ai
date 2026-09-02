@@ -300,7 +300,10 @@ a{ color:inherit; text-decoration:none; }
   background:var(--ink-bg-soft);
 }
 .countdown__label{ font-size:13.5px; color:var(--on-ink-muted); font-weight:600; }
-.countdown__digits{ display:flex; gap:14px; }
+/* Largest unit on the left, like most countdowns. Flipping the direction of
+   this one row does it without reversing the markup, so the DOM stays in
+   logical order and a screen reader still reads days through seconds. */
+.countdown__digits{ display:flex; gap:14px; direction:ltr; }
 .countdown__unit{ display:flex; flex-direction:column; align-items:center; min-width:44px; }
 .countdown__unit span{
   font-family:var(--font-display); font-weight:700; font-size:23px; color:var(--on-ink);
