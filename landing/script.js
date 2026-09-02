@@ -83,7 +83,10 @@ function buildFallingIcons() {
   // Honour the visitor's motion preference — no icons at all rather than static clutter.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const COUNT = 16;
+  // 16 marks read as airy across a desktop hero; on a phone the same number
+  // lands on top of the headline, so thin them out and fade them back.
+  const narrow = window.innerWidth < 640;
+  const COUNT = narrow ? 7 : 16;
   layer.textContent = '';
 
   for (let i = 0; i < COUNT; i += 1) {
@@ -100,7 +103,7 @@ function buildFallingIcons() {
     item.style.setProperty('--size', size.toFixed(0) + 'px');
     item.style.setProperty('--dur', (13 + Math.random() * 12).toFixed(1) + 's');
     item.style.setProperty('--delay', (-Math.random() * 22).toFixed(1) + 's');
-    item.style.setProperty('--op', (0.38 + Math.random() * 0.30).toFixed(2));
+    item.style.setProperty('--op', ((narrow ? 0.16 : 0.38) + Math.random() * (narrow ? 0.16 : 0.30)).toFixed(2));
     item.style.setProperty('--drift', (Math.random() * 60 - 30).toFixed(0) + 'px');
     item.style.setProperty('--rot', (Math.random() * 220 - 110).toFixed(0) + 'deg');
 

@@ -132,7 +132,7 @@ a{ color:inherit; text-decoration:none; }
 .nav__cta{
   display:inline-flex; align-items:center; gap:7px;
   border:1px solid #3A3D45; border-radius:999px;
-  padding:9px 17px; font-size:14px; font-weight:600; color:var(--on-ink);
+  padding:9px 17px; min-height:44px; font-size:14px; font-weight:600; color:var(--on-ink);
   transition:background .16s ease, border-color .16s ease, color .16s ease;
   white-space:nowrap;
 }
@@ -216,7 +216,7 @@ a{ color:inherit; text-decoration:none; }
   flex:1; min-width:0;
   border:0; background:transparent; outline:none;
   font-family:var(--font-body); font-size:15.5px; color:#16181D;
-  padding:11px 18px;
+  padding:11px 18px; min-height:44px;
 }
 .signup input::placeholder{ color:#9A9CA4; }
 .signup button{
@@ -450,7 +450,11 @@ a{ color:inherit; text-decoration:none; }
 }
 .site-footer p{ margin:0; font-size:13.5px; color:var(--on-paper-muted); }
 .site-footer nav{ display:flex; gap:20px; flex-wrap:wrap; }
-.site-footer nav a{ font-size:13.5px; font-weight:600; color:var(--on-paper-muted); }
+.site-footer nav a{
+  font-size:13.5px; font-weight:600; color:var(--on-paper-muted);
+  /* 44px minimum so the links are actually thumb-sized */
+  display:inline-flex; align-items:center; min-height:44px;
+}
 .site-footer nav a:hover{ color:var(--on-paper); }
 .site-footer nav a:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
 
