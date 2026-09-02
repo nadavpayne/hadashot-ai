@@ -1,0 +1,11 @@
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Vercel CLI link (created if the CLI is ever used here)
+.vercel

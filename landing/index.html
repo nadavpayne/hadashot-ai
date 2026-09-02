@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>חדשות בינה מלאכותית — AI בעברית. בלי שטויות.</title>
+<meta name="description" content="מהדורה שבועית שמסננת את הרעש סביב בינה מלאכותית ומשאירה רק מה שבאמת חשוב — בעברית, בלי הייפ.">
+<link rel="canonical" href="https://hadashot-ai.com/">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+
+<!-- Link previews (WhatsApp, X, LinkedIn, Slack) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hadashot-ai.com/">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="חדשות AI">
+<meta property="og:title" content="חדשות AI — כל מה שקורה ב-AI, פעם בשבוע">
+<meta property="og:description" content="מהדורה שבועית שמסננת את הרעש סביב בינה מלאכותית ומשאירה רק מה שבאמת חשוב — בעברית, בלי הייפ.">
+<meta property="og:image" content="https://hadashot-ai.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Assistant:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <svg class="sprite" aria-hidden="true" focusable="false"><defs>
+    <linearGradient id="g-gemini" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4285F4"/><stop offset=".55" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/>
+    </linearGradient>
+    <linearGradient id="g-metaai" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0064E0"/><stop offset=".55" stop-color="#A033FF"/><stop offset="1" stop-color="#FF5C87"/>
+    </linearGradient>
+    <symbol id="i-openai" viewBox="0 0 24 24"><path fill="currentColor" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+    <symbol id="i-gemini" viewBox="0 0 24 24"><path fill="url(#g-gemini)" d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="i-copilot" viewBox="0 0 24 24"><path fill="currentColor" d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+    <symbol id="i-metaai" viewBox="0 0 24 24"><path fill="url(#g-metaai)" d="M10.73.032c-1.333 0-2.032 1.016-2.032 2.285 0 2.223 2.127 4.953 4.318 4.953 1.301 0 2-.953 2-2.254 0-2.254-2.095-4.984-4.286-4.984m8.413 2.984c-1.968 0-3.397 2.73-3.397 4.825 0 1.556.794 3.016 2.254 3.016 2 0 3.365-2.762 3.365-4.794 0-1.523-.762-3.047-2.222-3.047M4.857 4.159c-1.968 0-3.778 1.016-3.778 2.54 0 1.65 2.16 2.793 4.254 2.793 1.873 0 3.778-.92 3.778-2.508 0-1.682-2.159-2.825-4.254-2.825m-.222 6.476C2.413 10.635 0 13.175 0 15.397c0 1.301.825 2.159 2.095 2.159 2.19 0 4.603-2.508 4.603-4.794 0-1.27-.761-2.127-2.063-2.127m16.667.698c-2.223 0-5.016 1.62-5.016 3.651 0 1.238 1.047 2.19 2.698 2.19 2.159 0 5.016-1.587 5.016-3.682 0-1.302-1.08-2.159-2.698-2.159M7.619 16c-1.524 0-2.38 1.746-2.38 3.429 0 2.063 1.269 4.54 3.047 4.54 1.524 0 2.38-1.81 2.38-3.461C10.667 18.57 9.46 16 7.62 16m6.571 1.016c-1.333 0-2.476.667-2.476 2.032 0 2.095 2.667 4.063 4.92 4.063 1.366 0 2.54-.73 2.54-2.063 0-2.032-2.698-4.032-4.984-4.032"/></symbol>
+    <symbol id="i-claude" viewBox="0 0 24 24"><path fill="#D97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+  </defs></svg>
+
+  <!-- ריצת כותרות — האלמנט שנשאר מהזהות של "מהדורה" -->
+  <div class="ticker" aria-label="כותרות מהעולם">
+    <div class="ticker__track">
+      <span class="ticker__item">Anthropic משיקה את Fable 5.1 — ציון המחקר המדעי יותר מהוכפל</span>
+      <span class="ticker__item">חוק ה-AI האירופי נכנס לאכיפה — קנסות עד 7% מהמחזור העולמי</span>
+      <span class="ticker__item">OpenAI חתכה את מחיר GPT-5.6 Luna ב-80%</span>
+      <span class="ticker__item">ג'מיני עבר מיליארד משתמשים חודשיים — 150 מיליון תמונות ביום</span>
+      <span class="ticker__item">90% מהמפתחים המקצועיים כבר עובדים עם סוכני AI</span>
+      <span class="ticker__item" aria-hidden="true">Anthropic משיקה את Fable 5.1 — ציון המחקר המדעי יותר מהוכפל</span>
+      <span class="ticker__item" aria-hidden="true">חוק ה-AI האירופי נכנס לאכיפה — קנסות עד 7% מהמחזור העולמי</span>
+      <span class="ticker__item" aria-hidden="true">OpenAI חתכה את מחיר GPT-5.6 Luna ב-80%</span>
+      <span class="ticker__item" aria-hidden="true">ג'מיני עבר מיליארד משתמשים חודשיים — 150 מיליון תמונות ביום</span>
+      <span class="ticker__item" aria-hidden="true">90% מהמפתחים המקצועיים כבר עובדים עם סוכני AI</span>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="ניווט ראשי">
+    <div class="wrap nav__inner">
+      <a class="brand" href="#top">
+        <img class="brand__mark" src="logo.svg" alt="" width="32" height="32">
+        <span class="brand__name">חדשות AI</span>
+      </a>
+      <div class="nav__links">
+        <a href="#issues">נושאים</a>
+        <a href="#about">אודות</a>
+        <a href="#preview">דוגמה</a>
+      </div>
+      <a class="nav__cta" href="#signup">הרשמה למהדורה <span aria-hidden="true">&#8592;</span></a>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <header class="hero">
+      <div class="fall" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="hero__badge"><span class="dot"></span>שידור חי</div>
+
+        <h1>כל מה שקורה ב-AI<br><span class="grad">פעם בשבוע, בקלות.</span></h1>
+
+        <p class="hero__lede">מהדורה שמסננת את הרעש, מסבירה למה זה חשוב, ומראה איך זה נוגע לעבודה שלכם. AI בעברית — בלי שטויות.</p>
+
+        <form class="signup" id="signup" novalidate>
+          <label for="email" class="visually-hidden">כתובת אימייל</label>
+          <input type="email" id="email" name="email" placeholder="כתובת האימייל שלך" autocomplete="email" required>
+          <button type="submit">אני בפנים</button>
+        </form>
+        <p class="form-status" role="status" aria-live="polite"></p>
+
+        <!-- כשיהיו נתונים אמיתיים: להחליף בשורת "הצטרפו ל-X קוראים" ובלוגואים אמיתיים.
+             עד אז נשארות כאן עובדות נכונות בלבד — בלי מספרים מומצאים. -->
+        <div class="proof">
+          <p class="proof__line">מהדורה <strong>#01</strong> יוצאת ביום ראשון הקרוב. מה שנסקור:</p>
+          <div class="proof__items">
+            <span>כלים</span>
+            <span>מודלים</span>
+            <span>מחקר</span>
+            <span>רגולציה</span>
+            <span>קוד</span>
+            <span>מוצר</span>
+          </div>
+        </div>
+
+        <div class="countdown">
+          <span class="countdown__label">המהדורה הבאה בעוד</span>
+          <div class="countdown__digits">
+            <div class="countdown__unit"><span id="cd-days">00</span><small>ימים</small></div>
+            <div class="countdown__unit"><span id="cd-hours">00</span><small>שעות</small></div>
+            <div class="countdown__unit"><span id="cd-mins">00</span><small>דקות</small></div>
+            <div class="countdown__unit"><span id="cd-secs">00</span><small>שניות</small></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="panel">
+
+      <section class="section" id="issues">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>מה יש במהדורה</h2>
+            <p>מה שקרה בחודש האחרון — ומה שייכנס לגיליון הקרוב.</p>
+          </div>
+
+
+          <div class="issues">
+            <article class="card card--featured">
+              <div class="card__thumb"><img src="https://cdn.sanity.io/images/4zrzovbb/website/932ca7d6f414ca22fd5a26dcc131410575b9b3e5-1200x630.jpg" alt="" loading="lazy"></div>
+              <a class="card__title" href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank" rel="noopener noreferrer">המודל שפתר באג נדיר שמהנדסים לא פיצחו שנים</a>
+              <p class="card__plus"><b>בנוסף:</b> Fable 5.1 יותר מהכפיל את הציון במחקר מדעי — ועולה 25% פחות להרצה</p>
+              <p class="card__meta">Anthropic · 1.9.2026</p>
+            </article>
+
+            <div class="issues__side">
+              <article class="card card--a">
+                <div class="card__thumb"><img src="https://www.wsgr.com/a/web/adqUPgj69sHwdeb28Nabsb/3z2Nu2/og-0122.jpg" alt="" loading="lazy"></div>
+                <a class="card__title" href="https://www.wsgr.com/en/insights/2026-year-in-preview-ai-regulatory-developments-for-companies-to-watch-out-for.html" target="_blank" rel="noopener noreferrer">חוק ה-AI האירופי נכנס לתוקף — גם אם אתם לא באירופה</a>
+                <p class="card__meta">Wilson Sonsini · 2.8.2026</p>
+              </article>
+
+              <article class="card card--b">
+                <div class="card__thumb"><img src="https://image.cnbcfm.com/api/v1/image/108323234-1781707873467-gettyimages-2281437321-AFP_B7EF6PE.jpeg?v=1781707898&amp;w=1920&amp;h=1080" alt="" loading="lazy"></div>
+                <a class="card__title" href="https://www.cnbc.com/2026/07/30/open-ai-price-cut-gpt.html" target="_blank" rel="noopener noreferrer">OpenAI חתכה מחירים ב-80% והכריזה על מיליארד משתמשים</a>
+                <p class="card__meta">CNBC · 30.7.2026</p>
+              </article>
+
+              <article class="card card--c">
+                <div class="card__thumb"><img src="https://blog.jetbrains.com/wp-content/uploads/2026/08/JB-social-BlogSocialShare-1280x720-1-3.png" alt="" loading="lazy"></div>
+                <a class="card__title" href="https://blog.jetbrains.com/research/2026/08/ai-coding-agent-adoption-2026/" target="_blank" rel="noopener noreferrer">90% מהמפתחים משתמשים בסוכני AI כל שבוע, ו-68% כל יום</a>
+                <p class="card__meta">JetBrains · אוגוסט 2026</p>
+              </article>
+
+              <article class="card card--d">
+                <div class="card__thumb"><img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/August_AI_Recap_social.width-1300.png" alt="" loading="lazy"></div>
+                <a class="card__title" href="https://blog.google/innovation-and-ai/technology/google-ai-updates-august-2026/" target="_blank" rel="noopener noreferrer">ג'מיני עבר מיליארד משתמשים — ומייצר 150 מיליון תמונות ביום</a>
+                <p class="card__meta">Google · אוגוסט 2026</p>
+              </article>
+            </div>
+          </div>
+
+
+          <div class="center-cta">
+            <a class="pill-btn" href="#signup">לכל המהדורות <span aria-hidden="true">&#8592;</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>למה דווקא את זה לקרוא</h2>
+            <p>יש מספיק ניוזלטרים על AI. זה מה שאנחנו עושים אחרת.</p>
+          </div>
+
+          <div class="values">
+            <div class="value">
+              <div class="value__num">01</div>
+              <h3>בלי הייפ</h3>
+              <p>מסננים החוצה את הרעש ואת ההבטחות הריקות. נשארים עם מה שבאמת משנה בעבודה שלכם.</p>
+            </div>
+            <div class="value">
+              <div class="value__num">02</div>
+              <h3>חמש דקות, לא חמישים טאבים</h3>
+              <p>תקציר שאפשר לקרוא בהפסקת קפה, לא מסמך מחקר שנשאר פתוח שבוע.</p>
+            </div>
+            <div class="value">
+              <div class="value__num">03</div>
+              <h3>עברית אמיתית</h3>
+              <p>נכתב בעברית מהתחלה — לא תרגום מכונה של ציוץ מאתמול בלילה.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="preview">
+        <div class="wrap">
+          <div class="section__head">
+            <h2>ככה זה נראה בתיבה</h2>
+            <p>בלי קירות טקסט, בלי באנרים. פותחים, קוראים, ממשיכים ביום.</p>
+          </div>
+
+          <div class="mock">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="mock__body">
+              <div class="mock__meta">חדשות בינה מלאכותית · גיליון #01</div>
+              <h3 class="mock__headline">העוזר האישי שבאמת עוזר (ולא רק מדבר יפה)</h3>
+              <ul class="mock__list">
+                <li>3 כלים שחוסכים לנו שעה ביום — בלי מנוי חדש</li>
+                <li>למה כדאי להיזהר מכל "מהפכת AI" שמובטחת השבוע</li>
+                <li>הכלי שהחלפנו בו תהליך שלם — ומה השתבש בדרך</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <section class="closing">
+          <h2>מוכנים להתמקצע בבינה מלאכותית?</h2>
+          <p>מהדורה אחת בשבוע, כל ראשון בבוקר.<br>אפשר להסיר את ההרשמה בקליק</p>
+          <form class="signup" novalidate>
+            <label for="email-2" class="visually-hidden">כתובת אימייל</label>
+            <input type="email" id="email-2" name="email" placeholder="כתובת האימייל שלך" autocomplete="email" required>
+            <button type="submit">אני בפנים</button>
+          </form>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p>חדשות בינה מלאכותית · נשלח ישירות לתיבה, בלי שטויות בדרך · © 2026</p>
+      <nav aria-label="קישורי תחתית">
+        <a href="#issues">ארכיון</a>
+        <a href="#about">אודות</a>
+        <a href="#signup">הרשמה</a>
+        <a href="mailto:hello@example.com">צרו קשר</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

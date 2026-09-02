@@ -1,0 +1,127 @@
+// ---- Countdown to next edition ----
+// Publishing schedule: every Sunday at 09:00, visitor's local clock
+// (the target Hebrew-speaking audience is assumed to be on Israel time).
+const ISSUE_WEEKDAY = 0; // Sunday
+const ISSUE_HOUR = 9;
+
+function getNextIssueAt() {
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(ISSUE_HOUR, 0, 0, 0);
+  target.setDate(now.getDate() + ((7 - now.getDay() + ISSUE_WEEKDAY) % 7));
+  if (target.getTime() <= now.getTime()) {
+    target.setDate(target.getDate() + 7);
+  }
+  return target.getTime();
+}
+
+const els = {
+  days: document.getElementById('cd-days'),
+  hours: document.getElementById('cd-hours'),
+  mins: document.getElementById('cd-mins'),
+  secs: document.getElementById('cd-secs'),
+};
+
+function pad(n) {
+  return String(Math.max(n, 0)).padStart(2, '0');
+}
+
+function updateCountdown() {
+  const totalSeconds = Math.max(Math.floor((getNextIssueAt() - Date.now()) / 1000), 0);
+
+  els.days.textContent = pad(Math.floor(totalSeconds / 86400));
+  els.hours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+  els.mins.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+  els.secs.textContent = pad(totalSeconds % 60);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ---- Signup forms (hero + closing band share the same behaviour) ----
+document.querySelectorAll('.signup').forEach((form) => {
+  const status = form.parentElement.querySelector('.form-status');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const email = form.email.value.trim();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isValid) {
+      status.textContent = 'זה לא נראה כמו אימייל תקין — נסו שוב.';
+      status.classList.remove('is-success');
+      return;
+    }
+
+    // TODO: wire to real signup backend once chosen (Resend / Beehiiv / ConvertKit / custom DB).
+    // For now this only confirms locally — no request is sent anywhere.
+
+    form.classList.add('is-done');
+    status.textContent = 'תודה! מהדורה #01 תנחת אצלך ביום ראשון.';
+    status.classList.add('is-success');
+  });
+});
+
+// ---- Falling brand marks in the hero (decorative) ----
+// Grok has no official mark in the simple-icons set, so it rides as a wordmark
+// in the same treatment. Swap in a real SVG symbol here if one becomes available.
+const BRANDS = [
+  { type: 'icon', id: 'i-openai' },                    // ChatGPT / OpenAI — mono mark, white on dark
+  { type: 'icon', id: 'i-gemini' },                    // Gemini / Google — real gradient
+  { type: 'icon', id: 'i-copilot' },                   // GitHub Copilot — official hex is #000, so white
+  { type: 'icon', id: 'i-metaai' },                    // Meta AI — real gradient
+  { type: 'icon', id: 'i-claude' },                    // Claude / Anthropic — #D97757
+  { type: 'word', text: 'Grok', color: '#FFFFFF' },    // Grok / xAI — no mark in the set
+];
+
+function buildFallingIcons() {
+  const layer = document.querySelector('.fall');
+  const hero = document.querySelector('.hero');
+  if (!layer || !hero) return;
+
+  // Honour the visitor's motion preference — no icons at all rather than static clutter.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const COUNT = 16;
+  layer.textContent = '';
+
+  for (let i = 0; i < COUNT; i += 1) {
+    const brand = BRANDS[i % BRANDS.length];
+    const item = document.createElement('span');
+    item.className = 'fall__item';
+
+    // Spread across the width, then jitter so the grid never reads as a grid.
+    const lane = (i / COUNT) * 100;
+    const x = Math.min(94, Math.max(1, lane + (Math.random() * 10 - 5)));
+    const size = 24 + Math.random() * 24;
+
+    item.style.setProperty('--x', x.toFixed(2) + '%');
+    item.style.setProperty('--size', size.toFixed(0) + 'px');
+    item.style.setProperty('--dur', (13 + Math.random() * 12).toFixed(1) + 's');
+    item.style.setProperty('--delay', (-Math.random() * 22).toFixed(1) + 's');
+    item.style.setProperty('--op', (0.38 + Math.random() * 0.30).toFixed(2));
+    item.style.setProperty('--drift', (Math.random() * 60 - 30).toFixed(0) + 'px');
+    item.style.setProperty('--rot', (Math.random() * 220 - 110).toFixed(0) + 'deg');
+
+    if (brand.color) item.style.color = brand.color;
+
+    if (brand.type === 'icon') {
+      item.innerHTML = '<svg viewBox="0 0 24 24"><use href="#' + brand.id + '"></use></svg>';
+    } else {
+      item.innerHTML = '<span class="fall__word">' + brand.text + '</span>';
+    }
+
+    layer.appendChild(item);
+  }
+
+  // The fall distance has to clear the hero, whose height changes with the viewport.
+  const setHeight = () => {
+    layer.style.setProperty('--fall-h', (hero.offsetHeight + 120) + 'px');
+  };
+  setHeight();
+  if ('ResizeObserver' in window) new ResizeObserver(setHeight).observe(hero);
+  else window.addEventListener('resize', setHeight);
+}
+
+buildFallingIcons();

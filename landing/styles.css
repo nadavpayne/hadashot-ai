@@ -1,0 +1,505 @@
+/* ==========================================================================
+   חדשות בינה מלאכותית — landing page
+   Layout system: dark hero with one gradient phrase, inline pill signup form,
+   then light rounded panels holding card grids.
+   ========================================================================== */
+
+:root{
+  /* Surfaces */
+  --ink-bg:#121316;          /* dark hero */
+  --ink-bg-soft:#1B1D22;     /* raised dark surfaces */
+  --paper:#FFFFFF;           /* light panels */
+  --paper-soft:#F7F7F8;      /* subtle light fill */
+
+  /* Text */
+  --on-ink:#F4F4F5;
+  --on-ink-muted:#A1A1AA;
+  --on-paper:#16181D;
+  --on-paper-muted:#63656E;
+
+  /* Lines */
+  --line-ink:#2A2D34;
+  --line-paper:#E6E6E9;
+
+  /* Brand */
+  --on-air:#2563EB;          /* ticker strip, live dot */
+  --grad-from:#38BDF8;
+  --grad-to:#6366F1;
+  /* Full-spectrum blue ramp for display type — cyan through violet. */
+  --grad-text:linear-gradient(100deg,#22D3EE 0%,#38BDF8 20%,#3B82F6 45%,#4F46E5 72%,#7C3AED 100%);
+
+  --font-display:"Rubik",Arial,"Segoe UI",Tahoma,sans-serif;
+  --font-body:"Assistant",Arial,"Segoe UI",Tahoma,sans-serif;
+
+  --wrap:1180px;
+  --radius:14px;
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--ink-bg);
+  color:var(--on-paper);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{ width:100%; max-width:var(--wrap); margin:0 auto; padding:0 24px; }
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+a{ color:inherit; text-decoration:none; }
+
+/* ---------- Ticker strip (brand signature, kept deliberately slim) ---------- */
+.ticker{
+  background:var(--on-air);
+  color:#fff;
+  overflow:hidden;
+  height:34px;
+  position:relative;
+  z-index:60;
+}
+/* width:max-content keeps the track at its full content width — as a flex item
+   it would collapse to the container and the animation would show nothing. */
+.ticker__track{
+  display:flex;
+  align-items:center;
+  height:34px;
+  width:max-content;
+  gap:44px;
+  white-space:nowrap;
+  animation:ticker-rtl 44s linear infinite;
+}
+.ticker:hover .ticker__track{ animation-play-state:paused; }
+.ticker__item{
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.01em;
+  opacity:.95;
+}
+.ticker__item::before{
+  content:"\25CF";
+  font-size:7px;
+  vertical-align:middle;
+  margin-inline-end:12px;
+  opacity:.7;
+}
+/* Hebrew reads right-to-left, so items enter at the left edge and exit right.
+   The list is duplicated in the markup, so 50% is exactly one full loop. */
+@keyframes ticker-rtl{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(50%); }
+}
+@media (prefers-reduced-motion: reduce){
+  .ticker__track{ animation:none; padding-inline-start:24px; }
+}
+
+/* ---------- Navigation ---------- */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(18,19,22,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-ink);
+}
+.nav__inner{
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  height:68px;
+}
+.brand{ display:flex; align-items:center; gap:11px; flex-shrink:0; }
+.brand__mark{
+  width:32px; height:32px;
+  display:block; flex-shrink:0;
+}
+.brand__name{
+  font-family:var(--font-display); font-weight:700; font-size:17px;
+  color:var(--on-ink); letter-spacing:-.01em; white-space:nowrap;
+}
+.nav__links{ display:flex; gap:26px; align-items:center; }
+.nav__links a{
+  font-size:14.5px; font-weight:600; color:var(--on-ink-muted);
+  transition:color .16s ease;
+}
+.nav__links a:hover{ color:var(--on-ink); }
+.nav__cta{
+  display:inline-flex; align-items:center; gap:7px;
+  border:1px solid #3A3D45; border-radius:999px;
+  padding:9px 17px; font-size:14px; font-weight:600; color:var(--on-ink);
+  transition:background .16s ease, border-color .16s ease, color .16s ease;
+  white-space:nowrap;
+}
+.nav__cta:hover{ background:#fff; color:#121316; border-color:#fff; }
+.nav__cta:focus-visible,
+.nav__links a:focus-visible,
+.brand:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
+
+@media (max-width:900px){
+  .nav__links{ display:none; }
+}
+/* The short wordmark leaves room for the CTA on ordinary phones; only the
+   very narrowest screens still need it out of the way. */
+@media (max-width:340px){
+  .nav__cta{ display:none; }
+  .brand__name{ font-size:15.5px; }
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:var(--ink-bg);
+  color:var(--on-ink);
+  text-align:center;
+  padding:86px 0 96px;
+  position:relative;
+  overflow:hidden;
+}
+.hero > .wrap{ position:relative; z-index:1; }
+.hero__badge{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--line-ink); border-radius:999px;
+  padding:6px 14px;
+  font-size:12.5px; font-weight:700; color:var(--on-ink-muted);
+  margin-bottom:30px;
+}
+.hero__badge .dot{
+  width:7px; height:7px; border-radius:50%; background:var(--on-air);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{ opacity:1; box-shadow:0 0 0 0 rgba(37,99,235,.55); }
+  50%{ opacity:.6; box-shadow:0 0 0 6px rgba(37,99,235,0); }
+}
+@media (prefers-reduced-motion: reduce){ .hero__badge .dot{ animation:none; } }
+
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(40px,7.4vw,88px);
+  line-height:1.04;
+  letter-spacing:-.025em;
+  margin:0 auto;
+  max-width:15ch;
+  text-wrap:balance;
+}
+.grad{
+  background:var(--grad-text);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+}
+.hero__lede{
+  margin:22px auto 0;
+  max-width:52ch;
+  font-size:clamp(16px,1.7vw,19px);
+  line-height:1.55;
+  color:var(--on-ink-muted);
+  text-wrap:balance;
+}
+
+/* Inline pill form */
+.signup{
+  margin:36px auto 0;
+  max-width:520px;
+  display:flex; align-items:center; gap:8px;
+  background:#fff;
+  border-radius:999px;
+  padding:7px;
+  box-shadow:0 10px 40px -18px rgba(0,0,0,.7);
+}
+.signup input{
+  flex:1; min-width:0;
+  border:0; background:transparent; outline:none;
+  font-family:var(--font-body); font-size:15.5px; color:#16181D;
+  padding:11px 18px;
+}
+.signup input::placeholder{ color:#9A9CA4; }
+.signup button{
+  flex-shrink:0;
+  border:0; cursor:pointer;
+  background:#16181D; color:#fff;
+  font-family:var(--font-body); font-weight:700; font-size:15px;
+  padding:13px 26px; border-radius:999px;
+  transition:transform .14s ease, background .16s ease;
+}
+.signup button:hover{ background:#000; transform:translateY(-1px); }
+.signup button:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
+.signup.is-done{ display:none; }
+
+.form-status{
+  margin:14px auto 0; min-height:22px;
+  font-size:14.5px; color:#FF8A94; font-weight:600;
+}
+.form-status.is-success{ color:#6EE7A8; font-size:16px; }
+
+/* Social proof */
+.proof{ margin-top:44px; }
+.proof__line{
+  font-size:13.5px; color:var(--on-ink-muted); margin:0 0 18px;
+}
+.proof__line strong{ color:var(--on-ink); font-weight:700; }
+.proof__items{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:12px 10px;
+  max-width:760px; margin:0 auto;
+}
+.proof__items span{
+  border:1px solid var(--line-ink); border-radius:999px;
+  padding:7px 15px; font-size:13.5px; font-weight:600; color:#C6C8CE;
+}
+
+/* Countdown */
+.countdown{
+  margin-top:42px;
+  display:inline-flex; align-items:center; gap:18px; flex-wrap:wrap;
+  justify-content:center;
+  border:1px solid var(--line-ink); border-radius:16px;
+  padding:14px 22px;
+  background:var(--ink-bg-soft);
+}
+.countdown__label{ font-size:13.5px; color:var(--on-ink-muted); font-weight:600; }
+.countdown__digits{ display:flex; gap:14px; }
+.countdown__unit{ display:flex; flex-direction:column; align-items:center; min-width:44px; }
+.countdown__unit span{
+  font-family:var(--font-display); font-weight:700; font-size:23px; color:var(--on-ink);
+  font-variant-numeric:tabular-nums; line-height:1.2;
+}
+.countdown__unit small{ font-size:11px; color:#8A8C94; font-weight:600; }
+
+/* ---------- Light panel ---------- */
+.panel{
+  background:var(--paper);
+  border-radius:34px 34px 0 0;
+  padding:76px 0 76px;
+  position:relative;
+}
+
+.section{ padding-bottom:76px; }
+/* Anchor targets sit below the sticky nav instead of scrolling under it. */
+.section, .signup{ scroll-margin-top:88px; }
+.section__head{ text-align:center; margin-bottom:44px; }
+.section__head h2{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(28px,4.2vw,46px); letter-spacing:-.02em;
+  margin:0; color:var(--on-paper); text-wrap:balance;
+}
+.section__head p{
+  margin:12px auto 0; max-width:56ch;
+  color:var(--on-paper-muted); font-size:16.5px;
+}
+
+/* Issue grid: one featured + four compact */
+.issues{
+  display:grid;
+  grid-template-columns:1.08fr 1fr;
+  gap:26px;
+  align-items:start;
+}
+.issues__side{
+  display:grid; grid-template-columns:1fr 1fr; gap:24px 22px;
+}
+@media (max-width:900px){
+  .issues{ grid-template-columns:1fr; }
+}
+@media (max-width:560px){
+  .issues__side{ grid-template-columns:1fr; }
+}
+
+.card{ display:flex; flex-direction:column; }
+.card__thumb{
+  position:relative;
+  border-radius:var(--radius);
+  overflow:hidden;
+  aspect-ratio:16/10;
+  background:linear-gradient(135deg,#0F172A,#1E3A8A 52%,#2563EB 88%);
+}
+.card--a .card__thumb{ background:linear-gradient(135deg,#1F2937,#4C1D95 58%,#BE185D); }
+.card--b .card__thumb{ background:linear-gradient(140deg,#0F172A,#155E75 55%,#0D9488); }
+.card--c .card__thumb{ background:linear-gradient(135deg,#292524,#7C2D12 58%,#EA580C); }
+.card--d .card__thumb{ background:linear-gradient(150deg,#1E1B4B,#4338CA 60%,#818CF8); }
+.card__thumb::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(120% 90% at 78% 12%,rgba(255,255,255,.16),transparent 60%);
+}
+/* Article thumbnails sit on top of the gradient, which stays as the fallback
+   if a remote image fails to load. The sheen is only for the bare gradient. */
+.card__thumb img{
+  position:absolute; inset:0; z-index:1;
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+/* Light thumbnails would otherwise bleed into the white panel — this keeps an edge. */
+.card__thumb:has(img){ box-shadow:inset 0 0 0 1px rgba(0,0,0,.10); }
+.card__thumb:has(img)::after{ display:none; }
+.card__title{
+  font-family:var(--font-display); font-weight:700;
+  letter-spacing:-.01em; color:var(--on-paper);
+  margin:14px 0 0; text-wrap:balance; display:block;
+}
+.card--featured .card__title{ font-size:clamp(22px,2.6vw,29px); line-height:1.25; }
+.issues__side .card__title{ font-size:17px; line-height:1.35; margin-top:12px; }
+.card__title:hover{ text-decoration:underline; }
+.card__title:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
+.card__plus{
+  margin:8px 0 0; font-size:15px; color:var(--on-paper-muted);
+}
+.card__plus b{
+  background:var(--grad-text);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:800;
+}
+.card__meta{
+  margin:9px 0 0; font-size:13px; color:#8A8C94; font-weight:600;
+  font-variant-numeric:tabular-nums;
+}
+
+.center-cta{ text-align:center; margin-top:44px; }
+.pill-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--line-paper); border-radius:999px;
+  padding:12px 24px; font-size:14.5px; font-weight:700; color:var(--on-paper);
+  background:#fff; cursor:pointer;
+  transition:border-color .16s ease, transform .14s ease;
+}
+.pill-btn:hover{ border-color:#B9BAC0; transform:translateY(-1px); }
+.pill-btn:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
+
+/* Value cards */
+.values{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+}
+@media (max-width:860px){ .values{ grid-template-columns:1fr; } }
+.value{
+  border:1px solid var(--line-paper); border-radius:var(--radius);
+  padding:28px 24px; background:var(--paper-soft);
+}
+.value__num{
+  font-family:var(--font-display); font-weight:800; font-size:14px;
+  background:var(--grad-text);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-variant-numeric:tabular-nums;
+}
+.value h3{
+  font-family:var(--font-display); font-weight:700; font-size:20px;
+  margin:10px 0 8px; color:var(--on-paper); letter-spacing:-.01em;
+}
+.value p{ margin:0; color:var(--on-paper-muted); font-size:15.5px; }
+
+/* Sample issue mock */
+.mock{
+  max-width:620px; margin:0 auto;
+  border:1px solid var(--line-paper); border-radius:18px;
+  overflow:hidden; background:#fff;
+  box-shadow:0 24px 60px -34px rgba(0,0,0,.4);
+}
+.mock__bar{
+  display:flex; gap:7px; align-items:center;
+  padding:13px 16px; background:var(--paper-soft);
+  border-bottom:1px solid var(--line-paper);
+}
+.mock__bar i{ width:10px; height:10px; border-radius:50%; background:#D6D7DB; }
+.mock__body{ padding:26px 26px 30px; }
+.mock__meta{
+  font-size:12.5px; font-weight:700; color:var(--on-air);
+  letter-spacing:.03em; margin-bottom:10px;
+}
+.mock__headline{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(20px,2.6vw,26px); line-height:1.3; letter-spacing:-.015em;
+  margin:0 0 16px; color:var(--on-paper);
+}
+.mock__list{ margin:0; padding:0; list-style:none; display:grid; gap:11px; }
+.mock__list li{
+  position:relative; padding-inline-start:20px;
+  font-size:15.5px; color:#3F424A; line-height:1.5;
+}
+.mock__list li::before{
+  content:""; position:absolute; inset-inline-start:0; top:9px;
+  width:8px; height:8px; border-radius:2px;
+  background:var(--grad-text);
+}
+
+/* Closing CTA band */
+.closing{
+  background:var(--ink-bg); color:var(--on-ink);
+  border-radius:26px;
+  padding:56px 32px;
+  text-align:center;
+}
+.closing h2{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(26px,3.6vw,40px); letter-spacing:-.02em;
+  margin:0 0 12px; text-wrap:balance;
+}
+.closing p{ margin:0 auto 26px; max-width:46ch; color:var(--on-ink-muted); font-size:16.5px; }
+.closing .signup{ margin-top:0; }
+
+/* Footer */
+.site-footer{
+  background:var(--paper); border-top:1px solid var(--line-paper);
+  padding:44px 0;
+}
+.site-footer__inner{
+  display:flex; justify-content:space-between; align-items:center;
+  gap:20px; flex-wrap:wrap;
+}
+.site-footer p{ margin:0; font-size:13.5px; color:var(--on-paper-muted); }
+.site-footer nav{ display:flex; gap:20px; flex-wrap:wrap; }
+.site-footer nav a{ font-size:13.5px; font-weight:600; color:var(--on-paper-muted); }
+.site-footer nav a:hover{ color:var(--on-paper); }
+.site-footer nav a:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
+
+@media (max-width:640px){
+  .hero{ padding:60px 0 68px; }
+  .panel{ border-radius:24px 24px 0 0; padding-top:56px; }
+  .signup{ flex-direction:column; border-radius:20px; padding:10px; gap:10px; }
+  .signup input{ width:100%; text-align:center; }
+  .signup button{ width:100%; }
+  .closing{ padding:40px 20px; }
+  .countdown{ width:100%; }
+}
+
+
+/* ---------- Falling brand marks (decorative) ----------
+   Official marks from simple-icons, inlined as a sprite. The layer sits behind
+   the hero content and is generated by script.js, which skips it entirely when
+   the visitor asks for reduced motion. */
+.sprite{ position:absolute; width:0; height:0; overflow:hidden; }
+
+.fall{
+  position:absolute; inset:0; z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.fall__item{
+  position:absolute;
+  top:0;
+  inset-inline-start:var(--x);
+  width:var(--size); height:var(--size);
+  color:#fff;
+  opacity:0;
+  animation:fall var(--dur) linear var(--delay) infinite;
+  will-change:transform, opacity;
+}
+.fall__item svg{ width:100%; height:100%; fill:currentColor; display:block; }
+.fall__word{
+  font-family:var(--font-display); font-weight:800;
+  font-size:calc(var(--size) * .62);
+  letter-spacing:-.02em; line-height:1;
+  display:grid; place-items:center; height:100%;
+  white-space:nowrap;
+}
+@keyframes fall{
+  0%   { transform:translate3d(0,-90px,0) rotate(0deg); opacity:0; }
+  8%   { opacity:var(--op); }
+  88%  { opacity:var(--op); }
+  100% { transform:translate3d(var(--drift),var(--fall-h,900px),0) rotate(var(--rot)); opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .fall{ display:none; }
+}
