@@ -233,6 +233,7 @@ a{ color:inherit; text-decoration:none; }
 .signup button:hover{ background:#000; transform:translateY(-1px); }
 .signup button:focus-visible{ outline:2px solid var(--grad-to); outline-offset:3px; }
 .signup.is-done{ display:none; }
+.lbl-narrow{ display:none; }
 
 .form-status{
   margin:14px auto 0; min-height:22px;
@@ -464,11 +465,20 @@ a{ color:inherit; text-decoration:none; }
 @media (max-width:640px){
   .hero{ padding:60px 0 68px; }
   .panel{ border-radius:24px 24px 0 0; padding-top:56px; }
-  .signup{ flex-direction:column; border-radius:20px; padding:10px; gap:10px; }
-  .signup input{ width:100%; text-align:center; }
-  .signup button{ width:100%; }
   .closing{ padding:40px 20px; }
   .countdown{ width:100%; }
+
+  /* The form stays a single pill on phones — the short label is what makes it fit. */
+  .lbl-wide{ display:none; }
+  .lbl-narrow{ display:inline; }
+  .signup button{ padding:13px 18px; }
+  .signup input{ padding-inline:14px; }
+
+  /* Drop the sixth topic and tighten the rest so all five hold one row,
+     down to 360px. Left at full size they break 4 + 1 and orphan the last. */
+  .proof__items{ gap:8px; flex-wrap:nowrap; }
+  .proof__items span:last-child{ display:none; }
+  .proof__items span{ font-size:12px; padding:6px 10px; white-space:nowrap; }
 }
 
 
