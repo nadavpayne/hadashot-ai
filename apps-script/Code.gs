@@ -5,6 +5,10 @@
  * Setup
  *  1. Open the Google Sheet that should hold the list.
  *  2. Extensions → Apps Script, paste this file over the default Code.gs.
+ *     If instead you started from script.google.com, this project is not
+ *     attached to any sheet — put the sheet's id in SPREADSHEET_ID below.
+ *     The id is the long string in the sheet's URL:
+ *     docs.google.com/spreadsheets/d/<THIS PART>/edit
  *  3. Deploy → New deployment → type "Web app".
  *       Execute as:      Me
  *       Who has access:  Anyone
@@ -19,6 +23,10 @@
  */
 
 var SHEET_NAME = 'signups';
+
+// Leave empty when this script was created from inside the sheet
+// (Extensions → Apps Script). Fill it in when the project is standalone.
+var SPREADSHEET_ID = '';
 
 function doPost(e) {
   try {
@@ -51,7 +59,17 @@ function doPost(e) {
 }
 
 function getSheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SPREADSHEET_ID
+    ? SpreadsheetApp.openById(SPREADSHEET_ID)
+    : SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!ss) {
+    throw new Error(
+      'No spreadsheet found. This project is not attached to a sheet, so set ' +
+      'SPREADSHEET_ID at the top of this file to the sheet you want to write to.'
+    );
+  }
+
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
