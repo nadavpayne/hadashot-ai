@@ -523,6 +523,10 @@ a{ color:inherit; text-decoration:none; }
 
   /* Drop the sixth topic and tighten the rest so all five hold one row,
      down to 360px. Left at full size they break 4 + 1 and orphan the last. */
+  /* balance evens out line lengths, which left headlines short of the frame.
+     On phones the lines should simply fill before they wrap. */
+  .card__title{ text-wrap:wrap; }
+
   .proof__items{ gap:8px; flex-wrap:nowrap; }
   .proof__items span:last-child{ display:none; }
   .proof__items span{ font-size:12px; padding:6px 10px; white-space:nowrap; }
