@@ -39,27 +39,53 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // ---- Signup forms (hero + closing band share the same behaviour) ----
+// Posts to /api/subscribe, which relays to the Google Sheet. The page only
+// claims success when the server actually confirms it — a failure has to look
+// like a failure, or we are back to telling people they subscribed when they
+// did not.
 document.querySelectorAll('.signup').forEach((form) => {
   const status = form.parentElement.querySelector('.form-status');
+  const button = form.querySelector('button');
 
-  form.addEventListener('submit', (event) => {
+  const fail = (message) => {
+    status.textContent = message;
+    status.classList.remove('is-success');
+  };
+
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const email = form.email.value.trim();
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    if (!isValid) {
-      status.textContent = 'זה לא נראה כמו אימייל תקין — נסו שוב.';
-      status.classList.remove('is-success');
+    if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
+      fail('זה לא נראה כמו אימייל תקין — נסו שוב.');
       return;
     }
 
-    // TODO: wire to real signup backend once chosen (Resend / Beehiiv / ConvertKit / custom DB).
-    // For now this only confirms locally — no request is sent anywhere.
+    button.disabled = true;
+    status.classList.remove('is-success');
+    status.textContent = 'רגע…';
 
-    form.classList.add('is-done');
-    status.textContent = 'תודה! מהדורה #01 תנחת אצלך ביום ראשון.';
-    status.classList.add('is-success');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, company: form.company ? form.company.value : '' }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        fail('משהו השתבש בהרשמה. נסו שוב עוד רגע.');
+        button.disabled = false;
+        return;
+      }
+
+      form.classList.add('is-done');
+      status.textContent = 'תודה! מהדורה #01 תנחת אצלך ביום ראשון.';
+      status.classList.add('is-success');
+    } catch {
+      fail('אין חיבור לשרת. בדקו את האינטרנט ונסו שוב.');
+      button.disabled = false;
+    }
   });
 });
 
