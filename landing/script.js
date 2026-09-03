@@ -56,7 +56,7 @@ document.querySelectorAll('.signup').forEach((form) => {
     event.preventDefault();
 
     const email = form.email.value.trim();
-    if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       fail('זה לא נראה כמו אימייל תקין — נסו שוב.');
       return;
     }
